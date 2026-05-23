@@ -4,7 +4,7 @@ Ce projet implémente le **LAB 18** d'Android Jetpack. L'application propose une
 
 ---
 
-## 🎯 Objectifs du LAB
+## Objectifs du LAB
 
 1. **Comprendre l'impact des changements de configuration** : Analyser pourquoi et comment les variables d'instance simples d'une Activity sont détruites lors de la rotation de l'écran.
 2. **Identifier les limites de `onSaveInstanceState()`** : Démontrer que cette méthode historique est limitée en taille de données, ne supporte pas le multithreading, et surcharge le code de l'Activity.
@@ -13,8 +13,12 @@ Ce projet implémente le **LAB 18** d'Android Jetpack. L'application propose une
 5. **Utiliser les meilleures pratiques Jetpack 2026** : Utilisation de la version stable `2.10.0` et de `SavedStateHandle` pour résister à la destruction du processus par le système (Process Death).
 
 ---
+## DEMO
 
-## 🏗️ Architecture & Concepts Internes
+https://youtu.be/ISi1zlsu8Ec
+
+---
+## Architecture & Concepts Internes
 
 L'application est structurée selon le patron de conception **MVVM** (Model-View-ViewModel) :
 
@@ -46,7 +50,7 @@ graph TD
 
 ---
 
-## 💻 Fonctionnalités de l'Interface Utilisateur (UI)
+## Fonctionnalités de l'Interface Utilisateur (UI)
 
 L'interface de l'application est divisée en plusieurs panneaux de contrôle interactifs :
 
@@ -62,7 +66,7 @@ L'interface de l'application est divisée en plusieurs panneaux de contrôle int
 
 ---
 
-## 🛠️ Configuration du Projet
+## Configuration du Projet
 
 ### Dépendances Gradle (Module : app)
 Le projet utilise Jetpack Lifecycle **2.10.0** et active le **ViewBinding** :
@@ -81,7 +85,7 @@ implementation(libs.lifecycle.viewmodel.savedstate)
 
 ---
 
-## 🧪 Guide de Test des Scénarios Réels
+## Guide de Test des Scénarios Réels
 
 ### Scénario 1 : Rotation sans ViewModel (Comportement Classique défaillant)
 1. Activez le mode **Sans ViewModel**.
@@ -124,7 +128,7 @@ implementation(libs.lifecycle.viewmodel.savedstate)
 
 ---
 
-## 📊 Tableau Comparatif
+## Tableau Comparatif
 
 | Critère | Version SANS ViewModel (Partie 1) | Version AVEC ViewModel + LiveData (Partie 2) |
 | :--- | :--- | :--- |
@@ -138,6 +142,6 @@ implementation(libs.lifecycle.viewmodel.savedstate)
 
 ---
 
-## 🏁 Conclusion
+## Conclusion
 
 Ce LAB démontre de manière concrète pourquoi le couple **ViewModel + LiveData** est devenu le standard absolu d'architecture sous Android depuis l'avènement des composants Jetpack. Il résout les plus grands défis du développement mobile Android : la gestion des configurations d'écran et la sécurité vis-à-vis du cycle de vie de l'application.
