@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_dark"
+    tools:context=".MainActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="24dp">
+
+            <!-- Gradient Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:background="@drawable/header_gradient"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="LAB 18"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:alpha="0.8" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ViewModel &amp; LiveData"
+                    android:textColor="@color/white"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Comparateur de Cycle de Vie en Temps Réel"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:alpha="0.9" />
+
+            </LinearLayout>
+
+            <!-- Main Layout Container -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Mode Selection Toggle -->
+                <com.google.android.material.button.MaterialButtonToggleGroup
+                    android:id="@+id/toggleGroupMode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:singleSelection="true"
+                    app:checkedButton="@id/btnModeClassic">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnModeClassic"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="SANS VIEWMODEL"
+                        android:textColor="@color/white"
+                        app:strokeColor="@color/primary" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnModeViewModel"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="AVEC VIEWMODEL"
+                        android:textColor="@color/white"
+                        app:strokeColor="@color/primary" />
+                </com.google.android.material.button.MaterialButtonToggleGroup>
+
+                <!-- Count Display Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardBackgroundColor="@color/card_background_dark"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#2E3A59">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:id="@+id/tvModeHeader"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mode Actuel : Sans ViewModel"
+                            android:textColor="@color/color_warning"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textAllCaps="true" />
+
+                        <TextView
+                            android:id="@+id/tvCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textColor="@color/white"
+                            android:textSize="96sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:text="VALEUR DU COMPTEUR"
+                            android:textColor="#8F9BB3"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:letterSpacing="0.1" />
+
+                        <!-- Counter Actions Buttons -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnDecrement"
+                                style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
+                                android:layout_width="56dp"
+                                android:layout_height="56dp"
+                                android:text="-"
+                                android:textSize="22sp"
+                                android:textColor="@color/white"
+                                android:layout_marginEnd="16dp" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnReset"
+                                style="@style/Widget.Material3.Button.TextButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="RÉINITIALISER"
+                                android:textColor="#E4E9F2"
+                                android:textSize="12sp" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnIncrement"
+                                style="@style/Widget.Material3.Button.IconButton.Filled"
+                                android:layout_width="56dp"
+                                android:layout_height="56dp"
+                                android:text="+"
+                                android:textSize="22sp"
+                                android:textColor="@color/white"
+                                android:layout_marginStart="16dp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Options / Scenarios Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardBackgroundColor="@color/card_background_dark"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#2E3A59">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Scénarios et Tests"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="12dp" />
+
+                        <!-- Container for Classic Mode Options -->
+                        <LinearLayout
+                            android:id="@+id/layoutClassicOptions"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="visible">
+
+                            <com.google.android.material.materialswitch.MaterialSwitch
+                                android:id="@+id/switchSaveState"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Activer onSaveInstanceState()"
+                                android:textColor="@color/white"
+                                android:textSize="14sp"
+                                android:layout_marginBottom="8dp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Remarque : Sans sauvegarde, tourner l'écran remet le compteur à 0. Avec sauvegarde, l'entier est restauré mais cette méthode est limitée (types primitifs légers uniquement, pas de threads ni données asynchrones complexes)."
+                                android:textColor="#8F9BB3"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+
+                        <!-- Container for ViewModel Mode Options -->
+                        <LinearLayout
+                            android:id="@+id/layoutViewModelOptions"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:layout_marginBottom="12dp">
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnBackgroundThread"
+                                    style="@style/Widget.Material3.Button.ElevatedButton"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:text="Thread Background (+1)"
+                                    android:textColor="@color/white" />
+
+                                <ProgressBar
+                                    android:id="@+id/pbLoading"
+                                    style="?android:attr/progressBarStyleSmall"
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:layout_marginStart="12dp"
+                                    android:visibility="gone" />
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="12dp"
+                                android:text="Le bouton ci-dessus simule une tâche en tâche de fond de 1s, puis met à jour via postValue(). Si vous tournez l'écran pendant le chargement, la tâche continue et l'UI se met à jour correctement après la rotation sans crash ni memory leak !"
+                                android:textColor="#8F9BB3"
+                                android:textSize="12sp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#2E3A59"
+                                android:layout_marginBottom="12dp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Test de mort du processus (Process Death) :"
+                                android:textColor="@color/white"
+                                android:textSize="13sp"
+                                android:textStyle="bold"
+                                android:layout_marginBottom="4dp" />
+
+                            <TextView
+                                android:id="@+id/tvAdbCommand"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/console_bg"
+                                android:padding="8dp"
+                                android:text="adb shell am kill com.example.lab_18_sas_houda"
+                                android:textColor="@color/console_accent"
+                                android:textSize="11sp"
+                                android:fontFamily="monospace"
+                                android:layout_marginBottom="8dp" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnCopyAdb"
+                                style="@style/Widget.Material3.Button.TextButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Copier la commande ADB"
+                                android:textSize="12sp"
+                                android:textColor="@color/secondary"
+                                android:layout_gravity="end" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Real-time Monitor Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="16dp"
+                    app:cardBackgroundColor="@color/card_background_dark"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#2E3A59">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Moniteur d'Instances &amp; Cycle de vie"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="12dp" />
+
+                        <!-- Grid representing Hashcodes -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="16dp">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:paddingEnd="8dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Activity Instance"
+                                    android:textColor="#8F9BB3"
+                                    android:textSize="11sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/tvActivityHash"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="MainActivity@000000"
+                                    android:textColor="@color/white"
+                                    android:textSize="13sp"
+                                    android:fontFamily="monospace" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:paddingStart="8dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="ViewModel Instance"
+                                    android:textColor="#8F9BB3"
+                                    android:textSize="11sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/tvViewModelHash"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Non instancié"
+                                    android:textColor="@color/color_warning"
+                                    android:textSize="13sp"
+                                    android:fontFamily="monospace" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Terminal de logs de cycle de vie :"
+                            android:textColor="#8F9BB3"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="6dp" />
+
+                        <!-- Log Console Screen -->
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="180dp"
+                            android:background="@drawable/console_bg_border"
+                            android:padding="8dp">
+
+                            <ScrollView
+                                android:id="@+id/scrollViewConsole"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fillViewport="true">
+
+                                <TextView
+                                    android:id="@+id/tvConsoleLogs"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/console_text"
+                                    android:textSize="11sp"
+                                    android:fontFamily="monospace"
+                                    android:text="Console initialisée.\nRotationnez l'appareil pour observer les changements." />
+                            </ScrollView>
+                        </FrameLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnClearLogs"
+                            style="@style/Widget.Material3.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Effacer la console"
+                            android:textSize="11sp"
+                            android:textColor="@color/color_error"
+                            android:layout_gravity="end"
+                            android:layout_marginTop="4dp" />
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
